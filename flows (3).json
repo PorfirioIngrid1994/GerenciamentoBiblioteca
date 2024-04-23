@@ -1,0 +1,2581 @@
+[
+    {
+        "id": "6fe168a9ef2a31e2",
+        "type": "tab",
+        "label": "Livraria_Gerenciamento",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "89982af51bc18c4f",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Query",
+        "func": "msg.payload = [{\n    query: \"SELECT booksporfirio.titulo_livro, booksporfirio.autor_livro FROM booksporfirio LEFT JOIN emprestados ON booksporfirio.cod_livro = emprestados.cod_livro WHERE emprestados.cod_livro IS NULL\"\n}]\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 180,
+        "wires": [
+            [
+                "7a1ddabacf7cb3be"
+            ]
+        ]
+    },
+    {
+        "id": "c91ea3385a733e30",
+        "type": "ui_button",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "group": "46483f56842c47dd",
+        "order": 3,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "search",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "89982af51bc18c4f",
+                "1fc3aab15d7ebdcf",
+                "e87a518e6eba4c1f"
+            ]
+        ]
+    },
+    {
+        "id": "7a1ddabacf7cb3be",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "53dd28f9a90ac34b",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1050,
+        "y": 180,
+        "wires": [
+            [
+                "e1715f370537ae92"
+            ]
+        ]
+    },
+    {
+        "id": "e1715f370537ae92",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "plotarTabela",
+        "func": "let recebe = msg.payload;\nlet objetoTamanho = recebe.length; \n\nvar vetorTabela = []\nvar contador = 0\n\nfor (var i=0; i<objetoTamanho; i++){\n    var tabela = new Object({});\n}\n\nif (contador <10){\n    vetorTabela.push(tabela);\n    contador++\n} else{\n    vetorTabela.push(tabela);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1250,
+        "y": 180,
+        "wires": [
+            [
+                "7868040f611dd1da"
+            ]
+        ]
+    },
+    {
+        "id": "7868040f611dd1da",
+        "type": "ui_table",
+        "z": "6fe168a9ef2a31e2",
+        "group": "46483f56842c47dd",
+        "name": "Livros Disponíveis",
+        "order": 6,
+        "width": 10,
+        "height": 7,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1450,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "9f4bede816b6b479",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Acervo com livros disponíveis",
+        "info": "",
+        "x": 1100,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "05e5bee596ddd926",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Logos - Disponíveis",
+        "info": "",
+        "x": 190,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "9ce4c337b619dd9d",
+        "type": "ui_media",
+        "z": "6fe168a9ef2a31e2",
+        "group": "771b204495434644",
+        "name": "",
+        "width": 3,
+        "height": 2,
+        "order": 1,
+        "category": "logo1",
+        "file": "OIG4.__tPRyefea8S5c_A-removebg-preview.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "073490bd80bb73f0",
+        "type": "inject",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "abd194f9a95a3d11"
+            ]
+        ]
+    },
+    {
+        "id": "abd194f9a95a3d11",
+        "type": "ui_template",
+        "z": "6fe168a9ef2a31e2",
+        "group": "108916df1b335a29",
+        "name": "",
+        "order": 1,
+        "width": 1,
+        "height": 1,
+        "format": "<style>\n    .novo_css_titulo {\n        font-size: 25px;\n        text-align: center;\n        display: flex;\n        justify-content: space-around;\n    }\n\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 440,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2585dfa032c70ac4",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "b6b198495490e4f9",
+        "order": 1,
+        "width": 14,
+        "height": 2,
+        "name": "",
+        "label": "Sistema de Gerenciamento",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "30",
+        "color": "#ffffff",
+        "x": 160,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "24fcf0028714516d",
+        "type": "ui_media",
+        "z": "6fe168a9ef2a31e2",
+        "group": "51073ab976e6c11e",
+        "name": "",
+        "width": 3,
+        "height": 2,
+        "order": 1,
+        "category": "logo2",
+        "file": "2-removebg-preview.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 390,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ce94374e468c9f47",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Livros Emprestados",
+        "info": "",
+        "x": 390,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "3d62c550c0b6aedf",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Logos - Emprestados",
+        "info": "",
+        "x": 200,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "9651f9d6d3f179a7",
+        "type": "inject",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 400,
+        "wires": [
+            [
+                "718238d8383567da"
+            ]
+        ]
+    },
+    {
+        "id": "718238d8383567da",
+        "type": "ui_template",
+        "z": "6fe168a9ef2a31e2",
+        "group": "108916df1b335a29",
+        "name": "",
+        "order": 1,
+        "width": 1,
+        "height": 1,
+        "format": "<style>\n    .novo_css_titulo {\n        font-size: 25px;\n        text-align: center;\n        display: flex;\n        justify-content: space-around;\n    }\n\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 440,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1fc3aab15d7ebdcf",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "QueryGeneros",
+        "func": "const recebe = msg.payload\n\nmsg.payload = {\n    query: \"SELECT genero_livro, COUNT(*) AS dadosgrafico FROM public.booksporfirio GROUP BY genero_livro ORDER BY CASE genero_livro WHEN 'Ficção' THEN 1 WHEN 'Suspense' THEN 2 WHEN 'Romance' THEN 3 WHEN 'Teatro' THEN 4 WHEN 'Literatura Clássica' THEN 5 WHEN 'Religião' THEN 6 WHEN 'Fantasia' THEN 7 WHEN 'Poesia/Epico' THEN 8 WHEN 'Terror' THEN 9 WHEN 'Filosofia' THEN 10 WHEN 'Não Ficcção' THEN 11 WHEN 'Biografia' THEN 12 WHEN 'Aventura' THEN 13 ELSE 14 END\"\n}\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 340,
+        "wires": [
+            [
+                "09cd14a04a3dcce8"
+            ]
+        ]
+    },
+    {
+        "id": "234aeaf37f7f119d",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "46483f56842c47dd",
+        "order": 2,
+        "width": 6,
+        "height": 1,
+        "name": "",
+        "label": "Títulos Disponíveis",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": 16,
+        "color": "#f8f6f1",
+        "x": 1450,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "12665083d3883e3a",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "listas",
+        "func": "const lista = [];\n\nconst generos = [\n    \"Ficção\",\n    \"Suspense\",\n    \"Romance\",\n    \"Teatro\",\n    \"Literatura Clássica\",\n    \"Religião\",\n    \"Fantasia\",\n    \"Poesia/Epico\",\n    \"Terror\",\n    \"Filosofia\",\n    \"Biografia\",\n    \"Aventura\",\n    \"Não Ficção\",\n];\n\nconst quantidades = [\n    23,\n    4,\n    12,\n    5,\n    8,\n    2,\n    18, \n    3, \n    2,\n    2, \n    2,\n    2,\n    6\n];\n\nfor (let i = 0; i < generos.length; i++) {\n    const dataSet = {\n        generos: generos[i],\n        quantidades: quantidades[i]\n    }; \n    lista.push(dataSet);\n}\n\nmsg.payload = lista;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 340,
+        "wires": [
+            [
+                "742c481ddfd9fe42"
+            ]
+        ]
+    },
+    {
+        "id": "30a3f9c44d5d513f",
+        "type": "change",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.generos",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.quantidades",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1700,
+        "y": 340,
+        "wires": [
+            [
+                "32540bf0a3044f83"
+            ]
+        ]
+    },
+    {
+        "id": "742c481ddfd9fe42",
+        "type": "split",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1490,
+        "y": 340,
+        "wires": [
+            [
+                "30a3f9c44d5d513f"
+            ]
+        ]
+    },
+    {
+        "id": "2a242aa40f66a89b",
+        "type": "inject",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 580,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32540bf0a3044f83",
+        "type": "ui_chart",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "group": "46483f56842c47dd",
+        "order": 8,
+        "width": 8,
+        "height": 7,
+        "label": "",
+        "chartType": "pie",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "70",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#8f92f0",
+            "#aec7e8",
+            "#2092cb",
+            "#8786ea",
+            "#4a66ba",
+            "#5659b3",
+            "#7d1ddd",
+            "#4f8bd8",
+            "#89abd7"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1870,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "09cd14a04a3dcce8",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "c70eae921d20b96c",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1070,
+        "y": 340,
+        "wires": [
+            [
+                "12665083d3883e3a"
+            ]
+        ]
+    },
+    {
+        "id": "f8bfb0c2ca4ea3f3",
+        "type": "ui_media",
+        "z": "6fe168a9ef2a31e2",
+        "group": "4cc31213a2849d58",
+        "name": "",
+        "width": 3,
+        "height": 2,
+        "order": 1,
+        "category": "logo1",
+        "file": "OIG4.__tPRyefea8S5c_A-removebg-preview.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 110,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c8a2e5bc961b2cb",
+        "type": "ui_media",
+        "z": "6fe168a9ef2a31e2",
+        "group": "dd0f100fe1a7b60b",
+        "name": "",
+        "width": 3,
+        "height": 2,
+        "order": 1,
+        "category": "logo2",
+        "file": "2-removebg-preview.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 430,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6295a06bbb6490e7",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "faf1541f284c1c66",
+        "order": 2,
+        "width": 14,
+        "height": 2,
+        "name": "",
+        "label": "Sistema de Gerenciamento",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "30",
+        "color": "#ffffff",
+        "x": 200,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "9af4a8bc91d2e32c",
+        "type": "ui_dropdown",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "label": "Autores",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "a4d9c1106bbb99a9",
+        "order": 3,
+        "width": 5,
+        "height": 1,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Paulo Coelho",
+                "value": "Paulo Coelho",
+                "type": "str"
+            },
+            {
+                "label": "Albert Camus",
+                "value": "Albert Camus",
+                "type": "str"
+            },
+            {
+                "label": "Sófocles",
+                "value": "Sófocles",
+                "type": "str"
+            },
+            {
+                "label": "Charles Duhigg",
+                "value": "Charles Duhigg",
+                "type": "str"
+            },
+            {
+                "label": "Lewis Carroll",
+                "value": "Lewis Carroll",
+                "type": "str"
+            },
+            {
+                "label": "Agatha Christie",
+                "value": "Agatha Christie",
+                "type": "str"
+            },
+            {
+                "label": "Philip Roth",
+                "value": "Philip Roth",
+                "type": "str"
+            },
+            {
+                "label": "Mary Shelley",
+                "value": "Mary Shelley",
+                "type": "str"
+            },
+            {
+                "label": "Jane Austen",
+                "value": "Jane Austen",
+                "type": "str"
+            },
+            {
+                "label": "Patrick Rothfuss",
+                "value": "Patrick Rothfuss",
+                "type": "str"
+            },
+            {
+                "label": "Rick Riordan",
+                "value": "Rick Riordan",
+                "type": "str"
+            },
+            {
+                "label": "Virgilio",
+                "value": "Virgilio",
+                "type": "str"
+            },
+            {
+                "label": "Miguel de Cervantes",
+                "value": "Miguel de Cervantes",
+                "type": "str"
+            },
+            {
+                "label": "Yuval Noah Harari",
+                "value": "Yuval Noah Harari",
+                "type": "str"
+            },
+            {
+                "label": "Cris Niklas",
+                "value": "Cris Niklas",
+                "type": "str"
+            },
+            {
+                "label": "Dan Brown",
+                "value": "Dan Brown",
+                "type": "str"
+            },
+            {
+                "label": "Clarice Lispector",
+                "value": "Clarice Lispector",
+                "type": "str"
+            },
+            {
+                "label": "Jay Asher",
+                "value": "Jay Asher",
+                "type": "str"
+            },
+            {
+                "label": "J.D. Salinger",
+                "value": "J.D. Salinger",
+                "type": "str"
+            },
+            {
+                "label": "Chuck Palahniuk",
+                "value": "Chuck Palahniuk",
+                "type": "str"
+            },
+            {
+                "label": "William Golding",
+                "value": "William Golding",
+                "type": "str"
+            },
+            {
+                "label": "Milan Kundera",
+                "value": "Milan Kundera",
+                "type": "str"
+            },
+            {
+                "label": "Hermann Hesse",
+                "value": "Hermann Hesse",
+                "type": "str"
+            },
+            {
+                "label": "C.S. Lewis",
+                "value": "C.S. Lewis",
+                "type": "str"
+            },
+            {
+                "label": "Leon Tolstói",
+                "value": "Leon Tolstói",
+                "type": "str"
+            },
+            {
+                "label": "Gil Vicente",
+                "value": "Gil Vicente",
+                "type": "str"
+            },
+            {
+                "label": "Fiódor Dostoiévski",
+                "value": "Fiódor Dostoiévski",
+                "type": "str"
+            },
+            {
+                "label": "Aristoteles",
+                "value": "Aristoteles",
+                "type": "str"
+            },
+            {
+                "label": "Stephen Hawking",
+                "value": "Stephen Hawking",
+                "type": "str"
+            },
+            {
+                "label": "Bram Stoker",
+                "value": "Bram Stoker",
+                "type": "str"
+            },
+            {
+                "label": "J.K.Rowling",
+                "value": "J.K.Rowling",
+                "type": "str"
+            },
+            {
+                "label": "Anne Frank",
+                "value": "Anne Frank",
+                "type": "str"
+            },
+            {
+                "label": "William P. Young",
+                "value": "William P. Young",
+                "type": "str"
+            },
+            {
+                "label": "Philip Pullman",
+                "value": "Philip Pullman",
+                "type": "str"
+            },
+            {
+                "label": "Holly Black & Tony DiTerlizzi",
+                "value": "Holly Black & Tony DiTerlizzi",
+                "type": "str"
+            },
+            {
+                "label": "Oscar Wilde",
+                "value": "Oscar Wilde",
+                "type": "str"
+            },
+            {
+                "label": "Robert Louis Stevenson",
+                "value": "Robert Louis Stevenson",
+                "type": "str"
+            },
+            {
+                "label": "F. Scott Fitzgerald",
+                "value": "F. Scott Fitzgerald",
+                "type": "str"
+            },
+            {
+                "label": "Dante Alighieri",
+                "value": "Dante Alighieri",
+                "type": "str"
+            },
+            {
+                "label": "Harper Lee",
+                "value": "Harper Lee",
+                "type": "str"
+            },
+            {
+                "label": "Sun Tzu",
+                "value": "Sun Tzu",
+                "type": "str"
+            },
+            {
+                "label": "Vladimir Nabokov",
+                "value": "Vladimir Nabokov",
+                "type": "str"
+            },
+            {
+                "label": "Aldous Huxley",
+                "value": "Aldous Huxley",
+                "type": "str"
+            },
+            {
+                "label": "Arthur Conan Doyle",
+                "value": "Arthur Conan Doyle",
+                "type": "str"
+            },
+            {
+                "label": "George Orwell",
+                "value": "George Orwell",
+                "type": "str"
+            },
+            {
+                "label": "Jostein Gaarder",
+                "value": "Jostein Gaarder",
+                "type": "str"
+            },
+            {
+                "label": "Ernest Hemingway",
+                "value": "Ernest Hemingway",
+                "type": "str"
+            },
+            {
+                "label": "William Shakespeare",
+                "value": "William Shakespeare",
+                "type": "str"
+            },
+            {
+                "label": "Eça de Queirós",
+                "value": "Eça de Queirós",
+                "type": "str"
+            },
+            {
+                "label": "James Joyce",
+                "value": "James Joyce",
+                "type": "str"
+            },
+            {
+                "label": "Robin Hobb",
+                "value": "Robin Hobb",
+                "type": "str"
+            },
+            {
+                "label": "Charles Dickens",
+                "value": "Charles Dickens",
+                "type": "str"
+            },
+            {
+                "label": "Walter Isaacson",
+                "value": "Walter Isaacson",
+                "type": "str"
+            },
+            {
+                "label": "Herman Melville",
+                "value": "Herman Melville",
+                "type": "str"
+            },
+            {
+                "label": "Machado de Assis",
+                "value": "Machado de Assis",
+                "type": "str"
+            },
+            {
+                "label": "Alice Walker",
+                "value": "Alice Walker",
+                "type": "str"
+            },
+            {
+                "label": "Nathaniel Hawthorne",
+                "value": "Nathaniel Hawthorne",
+                "type": "str"
+            },
+            {
+                "label": "Gabriel García Márquez",
+                "value": "Gabriel García Márquez",
+                "type": "str"
+            },
+            {
+                "label": "Pedro Bandeira",
+                "value": "Pedro Bandeira",
+                "type": "str"
+            },
+            {
+                "label": "Markus Zusak",
+                "value": "Markus Zusak",
+                "type": "str"
+            },
+            {
+                "label": "Homero",
+                "value": "Homero",
+                "type": "str"
+            },
+            {
+                "label": "Lev Tolstói",
+                "value": "Lev Tolstói",
+                "type": "str"
+            },
+            {
+                "label": "Sêneca",
+                "value": "Sêneca",
+                "type": "str"
+            },
+            {
+                "label": "Brandon Sanderson",
+                "value": "Brandon Sanderson",
+                "type": "str"
+            },
+            {
+                "label": "J.R.R.Tolkien",
+                "value": "J.R.R.Tolkien",
+                "type": "str"
+            },
+            {
+                "label": "Franz Kafka",
+                "value": "Franz Kafka",
+                "type": "str"
+            },
+            {
+                "label": "Antoine de Saint-Exupéry",
+                "value": "Antoine de Saint-Exupéry",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 200,
+        "y": 1040,
+        "wires": [
+            [
+                "ea2c1082d218363f"
+            ]
+        ]
+    },
+    {
+        "id": "ea2c1082d218363f",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "varGlobal",
+        "func": "var recebe = msg.payload;\n\nglobal.set(\"autores_Livros\", recebe);\nvar autores_Livros = recebe;\n\nmsg.payload = autores_Livros;\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 1040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "193c634bb4c50f04",
+        "type": "ui_button",
+        "z": "6fe168a9ef2a31e2",
+        "name": "3 - filtros",
+        "group": "a4d9c1106bbb99a9",
+        "order": 4,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "search",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 380,
+        "y": 1140,
+        "wires": [
+            [
+                "851eac4160530724",
+                "c4827071f8fa06c0",
+                "19158f2b8c51b83f"
+            ]
+        ]
+    },
+    {
+        "id": "851eac4160530724",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "query",
+        "func": "// var recebe = msg.payload;\n\n// var autores_livros = global.get(\"autores_Livros\")\n\n// msg.payload = [{\n//     query: \"SELECT public.booksporfirio.titulo_livro FROM public.booksporfirio WHERE public.booksporfirio.autor_livro= '\" + autores_livros + \"';\"\n// }];\n\n// msg.id = msg.payload\n\n// return msg.id;\n\nvar recebe = msg.payload;\nvar autores_livros = global.get(\"autores_Livros\");\n\nmsg.payload = [{\n    query: \"SELECT booksporfirio.titulo_livro AS Titulos, CASE WHEN emprestados.dias_atraso IS NULL THEN 'Disponível' ELSE 'Alugado' END AS Status, emprestados.data_devol AS \\\"Previsao de Devolucao\\\" FROM booksporfirio LEFT JOIN emprestados ON booksporfirio.cod_livro = emprestados.cod_livro WHERE public.booksporfirio.autor_livro = '\" + autores_livros + \"';\"\n}];\n\nmsg.id = msg.payload;\n\nreturn msg.id;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1040,
+        "wires": [
+            [
+                "91b9b7861dbe1b39",
+                "4eb1624332440fd9"
+            ]
+        ]
+    },
+    {
+        "id": "586139259f93ead0",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "plotarTabela",
+        "func": "let recebe = msg.payload;\nlet objetoTamanho = recebe.length; \n\nvar vetorTabela = []\nvar contador = 0\n\nfor (var i=0; i< objetoTamanho; i++){\n    var tabela = new Object({});\n}\n\nif (contador <10){\n    vetorTabela.push(tabela);\n    contador++\n} else{\n    vetorTabela.push(tabela);\n}\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 1040,
+        "wires": [
+            [
+                "b4c81c2968952144"
+            ]
+        ]
+    },
+    {
+        "id": "b4c81c2968952144",
+        "type": "ui_table",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "name": "Filtros",
+        "order": 7,
+        "width": 10,
+        "height": 3,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1070,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "91b9b7861dbe1b39",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 730,
+        "y": 1040,
+        "wires": [
+            [
+                "586139259f93ead0",
+                "58d2c4f258f0f50a"
+            ]
+        ]
+    },
+    {
+        "id": "bf801a2029fba0eb",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Filtragem por autores",
+        "info": "",
+        "x": 440,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "e827ce8569bc1465",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "queryEmprestimos",
+        "func": "msg.payload = [{\n    query: \"SELECT \tbooksporfirio.titulo_livro, dados_alugueis.nome, dados_alugueis.email, emprestados.data_devol, emprestados.dias_atraso, emprestados.valor_multa FROM booksporfirio INNER JOIN dados_alugueis ON booksporfirio.cod_livro = dados_alugueis.id_aluguel INNER JOIN emprestados ON booksporfirio.cod_livro = emprestados.cod_livro;\"\n}]\n\nmsg.id = msg.payload\nreturn msg.id\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 860,
+        "wires": [
+            [
+                "e94ed8c16ca57e68"
+            ]
+        ]
+    },
+    {
+        "id": "e94ed8c16ca57e68",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 490,
+        "y": 860,
+        "wires": [
+            [
+                "10c1752505d52691",
+                "3accb9deeaa12c92"
+            ]
+        ]
+    },
+    {
+        "id": "10c1752505d52691",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "plotarTabelaEmprestimos",
+        "func": "let recebe = msg.payload;\nlet objetoTamanho = recebe.length;\n\nvar vetorTabela = []\nvar contador = 0\n\nfor (var i = 0; i < objetoTamanho; i++) {\n    var tabela = new Object({});\n}\n\nif (contador < 10) {\n    vetorTabela.push(tabela);\n    contador++\n} else {\n    vetorTabela.push(tabela);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 860,
+        "wires": [
+            [
+                "5e26f0d778cdfec7"
+            ]
+        ]
+    },
+    {
+        "id": "5e26f0d778cdfec7",
+        "type": "ui_table",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "name": "dados emprestimos",
+        "order": 17,
+        "width": 12,
+        "height": 6,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 1110,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "bdda3fd0c04a7b1c",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "order": 13,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "Livros Emprestados",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": 16,
+        "color": "#ffffff",
+        "x": 1120,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "86e893a99fd8a44d",
+        "type": "ui_button",
+        "z": "6fe168a9ef2a31e2",
+        "name": "2 - emprestimos",
+        "group": "a4d9c1106bbb99a9",
+        "order": 14,
+        "width": 4,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "search",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 120,
+        "y": 780,
+        "wires": [
+            [
+                "e827ce8569bc1465"
+            ]
+        ]
+    },
+    {
+        "id": "3accb9deeaa12c92",
+        "type": "debug",
+        "z": "6fe168a9ef2a31e2",
+        "name": "debug 380",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e87a518e6eba4c1f",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "QueryGenerosContagem",
+        "func": "msg.payload = {\n    query: \"SELECT booksporfirio.genero_livro, COUNT(*) FROM booksporfirio JOIN emprestados ON booksporfirio.cod_livro = emprestados.cod_livro GROUP BY booksporfirio.genero_livro ORDER BY COUNT(*) DESC;\"\n}\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 440,
+        "wires": [
+            [
+                "71ee5d41b19403f6"
+            ]
+        ]
+    },
+    {
+        "id": "71ee5d41b19403f6",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 1150,
+        "y": 440,
+        "wires": [
+            [
+                "260479268f480f7f"
+            ]
+        ]
+    },
+    {
+        "id": "260479268f480f7f",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "listas",
+        "func": "const lista = [];\n\nconst generos_emprestados = [\n    \"Ficção\",\n    \"Fantasia\",\n    \"Literatura Clássica\",\n    \"Não-Ficção\",\n    \"Filosofia\",\n    \"Romance\",\n    \"Aventura\",\n    \"Suspense\",\n    \"Poesia/Epico\",\n    \"Terror\"    \n];\n\nconst quantidades_emprestadas = [\n    6,\n    5,\n    4,\n    3,\n    1,\n    1,\n    1,\n    1,\n    1,\n    1    \n];\n\nfor (let i = 0; i < generos_emprestados.length; i++) {\n    const dataSet = {\n        generos_emprestados: generos_emprestados[i],\n        quantidades_emprestadas: quantidades_emprestadas[i]\n    }; \n    lista.push(dataSet);\n}\n\nmsg.payload = lista;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1330,
+        "y": 440,
+        "wires": [
+            [
+                "e7aa604a06f6fab2"
+            ]
+        ]
+    },
+    {
+        "id": "e7aa604a06f6fab2",
+        "type": "split",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 1470,
+        "y": 440,
+        "wires": [
+            [
+                "b32ea1a89cbc9b99"
+            ]
+        ]
+    },
+    {
+        "id": "b32ea1a89cbc9b99",
+        "type": "change",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.generos_emprestados",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.quantidades_emprestadas",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1640,
+        "y": 440,
+        "wires": [
+            [
+                "de66625f2a820196"
+            ]
+        ]
+    },
+    {
+        "id": "de66625f2a820196",
+        "type": "ui_chart",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "group": "46483f56842c47dd",
+        "order": 24,
+        "width": 20,
+        "height": 11,
+        "label": "",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "10",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#b68181",
+            "#d54452",
+            "#e31621",
+            "#df8b8b",
+            "#d62728",
+            "#feaba9",
+            "#ff8670",
+            "#ee5311"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1830,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "432ea6eab182f6ae",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "46483f56842c47dd",
+        "order": 23,
+        "width": 20,
+        "height": 1,
+        "name": "",
+        "label": "Top 10 gêneros mais emprestados",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "20",
+        "color": "#f4f0f0",
+        "x": 1820,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "b2e7d8c56465f007",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "queryContatos",
+        "func": "msg.payload = [{\n    query: \"SELECT nome, sobrenome, email, celular FROM dados_alugueis;\"\n}]\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 660,
+        "wires": [
+            [
+                "7f10383d3bb73525"
+            ]
+        ]
+    },
+    {
+        "id": "7f10383d3bb73525",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 490,
+        "y": 660,
+        "wires": [
+            [
+                "1201a77897dcdc84"
+            ]
+        ]
+    },
+    {
+        "id": "1201a77897dcdc84",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "function 166",
+        "func": "let recebe = msg.payload;\nlet objetoTamanho = recebe.length; \n\nvar vetorTabela = []\nvar contador = 0\n\nfor (var i=0; i<objetoTamanho; i++){\n    var tabela = new Object({});\n}\n\nif (contador <10){\n    vetorTabela.push(tabela);\n    contador++\n} else{\n    vetorTabela.push(tabela);\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "28b6fd6d61ffae84"
+            ]
+        ]
+    },
+    {
+        "id": "28b6fd6d61ffae84",
+        "type": "ui_table",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "name": "Contatos",
+        "order": 18,
+        "width": 10,
+        "height": 6,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 860,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "ddc3e25f2826d315",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "order": 15,
+        "width": 8,
+        "height": 1,
+        "name": "",
+        "label": "Dados de locadores",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": 16,
+        "color": "#fbf9f9",
+        "x": 860,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "c1a1e52c55a30e1f",
+        "type": "ui_button",
+        "z": "6fe168a9ef2a31e2",
+        "name": "1 - contatos",
+        "group": "a4d9c1106bbb99a9",
+        "order": 16,
+        "width": 2,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "search",
+        "payload": "",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 110,
+        "y": 660,
+        "wires": [
+            [
+                "b2e7d8c56465f007"
+            ]
+        ]
+    },
+    {
+        "id": "4eb1624332440fd9",
+        "type": "debug",
+        "z": "6fe168a9ef2a31e2",
+        "name": "debug Query",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "58d2c4f258f0f50a",
+        "type": "debug",
+        "z": "6fe168a9ef2a31e2",
+        "name": "debug Nó Postgres",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "45942cc6628794d3",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Gráfico com os livros mais alugados",
+        "info": "",
+        "x": 780,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "c4827071f8fa06c0",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "queryGraficoMaisEmprestados",
+        "func": "msg.payload = {\n    query: \"SELECT booksporfirio.titulo_livro AS Titulos, COUNT(*) AS qtd_emprestimos FROM public.emprestados INNER JOIN booksporfirio ON emprestados.cod_livro = booksporfirio.cod_livro GROUP BY booksporfirio.titulo_livro ORDER BY COUNT(*) DESC;\"\n}\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 1340,
+        "wires": [
+            [
+                "89096976106577d2"
+            ]
+        ]
+    },
+    {
+        "id": "89096976106577d2",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 610,
+        "y": 1340,
+        "wires": [
+            [
+                "4904e978ede7d05f"
+            ]
+        ]
+    },
+    {
+        "id": "4904e978ede7d05f",
+        "type": "split",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 830,
+        "y": 1340,
+        "wires": [
+            [
+                "88abe50df7478dd2"
+            ]
+        ]
+    },
+    {
+        "id": "88abe50df7478dd2",
+        "type": "change",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.titulos",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.qtd_emprestimos",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1060,
+        "y": 1340,
+        "wires": [
+            [
+                "f80eb3e484297b92"
+            ]
+        ]
+    },
+    {
+        "id": "f80eb3e484297b92",
+        "type": "ui_chart",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Mais emprestados",
+        "group": "a4d9c1106bbb99a9",
+        "order": 24,
+        "width": 12,
+        "height": 11,
+        "label": "",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "6",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1310,
+        "y": 1340,
+        "wires": [
+            [
+                "4f7f31cad3394a4c"
+            ]
+        ]
+    },
+    {
+        "id": "36a370c8134755e1",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "order": 22,
+        "width": 12,
+        "height": 1,
+        "name": "",
+        "label": "Ranking de Empréstimos",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "18",
+        "color": "#f7f7f7",
+        "x": 1310,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "97bcf4ec55e75252",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "order": 20,
+        "width": 21,
+        "height": 1,
+        "name": "",
+        "label": "Gráficos Para Análise",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "18",
+        "color": "#f8f6f6",
+        "x": 1320,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "4f7f31cad3394a4c",
+        "type": "debug",
+        "z": "6fe168a9ef2a31e2",
+        "name": "debug 381",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1550,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "d92591dedc93def7",
+        "type": "comment",
+        "z": "6fe168a9ef2a31e2",
+        "name": "Gráfico com os meses de maiores empréstimos",
+        "info": "",
+        "x": 800,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "19158f2b8c51b83f",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "queryMeses",
+        "func": "msg.payload = {\n    query: \"SELECT EXTRACT(MONTH FROM data_emp) AS mes, COUNT(*) AS total_emprestimos FROM emprestados GROUP BY mes ORDER BY total_emprestimos DESC;\"\n}\n\nmsg.id = msg.payload\nreturn msg.id",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1560,
+        "wires": [
+            [
+                "cc6c4957421c48c9"
+            ]
+        ]
+    },
+    {
+        "id": "cc6c4957421c48c9",
+        "type": "postgresql",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "query": "{{msg.id}}",
+        "postgreSQLConfig": "af50cec9a8f7f617",
+        "split": false,
+        "rowsPerMsg": 1,
+        "outputs": 1,
+        "x": 590,
+        "y": 1560,
+        "wires": [
+            [
+                "c4dac931a8577a96"
+            ]
+        ]
+    },
+    {
+        "id": "c4dac931a8577a96",
+        "type": "function",
+        "z": "6fe168a9ef2a31e2",
+        "name": "function 168",
+        "func": "const recebe = msg.payload\n\nconst lista = []\n\nconst meses = [\n    'Abril',\n    'Fevereiro',\n    'Março',\n    'Janeiro',\n    'Maio'\n]\n\n\nconst total_emprestimos = [\n    19,\n    6,\n    5,\n    4,\n    3\n]\n\nfor (let i = 0; i < meses.length; i++) {\n    const dataSet = {\n        meses: meses[i],\n        total_emprestimos: total_emprestimos[i]\n    }; \n    lista.push(dataSet);\n}\n\nmsg.payload = lista;\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 1560,
+        "wires": [
+            [
+                "8b43b83c02f1e197"
+            ]
+        ]
+    },
+    {
+        "id": "8b43b83c02f1e197",
+        "type": "split",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 990,
+        "y": 1560,
+        "wires": [
+            [
+                "ebad195bb4f9eff9"
+            ]
+        ]
+    },
+    {
+        "id": "ebad195bb4f9eff9",
+        "type": "change",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "payload.meses",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.total_emprestimos",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1200,
+        "y": 1560,
+        "wires": [
+            [
+                "3033645c674111a3"
+            ]
+        ]
+    },
+    {
+        "id": "3033645c674111a3",
+        "type": "ui_chart",
+        "z": "6fe168a9ef2a31e2",
+        "name": "",
+        "group": "a4d9c1106bbb99a9",
+        "order": 25,
+        "width": 10,
+        "height": 6,
+        "label": "",
+        "chartType": "bar",
+        "legend": "true",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "6",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": true,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#84afe6",
+            "#3f95ca",
+            "#69a4f2",
+            "#2fb9f4",
+            "#5d45d9",
+            "#3092ab",
+            "#51bdbb",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1410,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "17b319d8dbf7fd75",
+        "type": "ui_text",
+        "z": "6fe168a9ef2a31e2",
+        "group": "a4d9c1106bbb99a9",
+        "order": 23,
+        "width": 10,
+        "height": 1,
+        "name": "",
+        "label": "Meses Com Maior Número de  Empréstimos",
+        "format": "{{msg.payload}}",
+        "layout": "row-center",
+        "className": "",
+        "style": true,
+        "font": "Lucida Sans Typewriter,Lucida Console,Monaco,monospace",
+        "fontSize": "18",
+        "color": "#ffffff",
+        "x": 1410,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "4ef3c968987e3cce",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "33ac182f0be17b1b",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "e042d189f40eeac7",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "33ac182f0be17b1b",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d6e6c54b9b509347",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "33ac182f0be17b1b",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "0c7f871f11819c15",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "9fc3dc395ccf2efb",
+        "order": 1,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "74a19959c9d168a7",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "9fc3dc395ccf2efb",
+        "order": 3,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f7c381ec694d9232",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "9fc3dc395ccf2efb",
+        "order": 4,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a2d07b7d337045b5",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "9fc3dc395ccf2efb",
+        "order": 5,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "b73317d814a3774e",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 1,
+        "width": 20,
+        "height": 1
+    },
+    {
+        "id": "b67d27ccaac875cd",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 4,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "a0ee46dba6a8a2b0",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 5,
+        "width": 20,
+        "height": 1
+    },
+    {
+        "id": "905820f4497c6822",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 7,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "821b7920fb085372",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 9,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "67d89895bdf8982a",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 10,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "4daf0edea5f0a738",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 11,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "93522457efbd486b",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 12,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "f933c892403ff404",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 13,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7dc6fd8544ddee3f",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 14,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "73b500fabb3aaed8",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 15,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "6f212246c0a04139",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 16,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "da29c16f25c5461d",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 17,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "3cc52d046de98f4f",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 18,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "9c57c941a8bac1fb",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 19,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "a441866bbbb22209",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 20,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "7661eb2387fbd4ad",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "15c4bda76092005d",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "46483f56842c47dd",
+        "order": 22,
+        "width": 20,
+        "height": 1
+    },
+    {
+        "id": "c56b082a67a07048",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "faf1541f284c1c66",
+        "order": 1,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "070c7d848ba1c70c",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "faf1541f284c1c66",
+        "order": 3,
+        "width": 2,
+        "height": 1
+    },
+    {
+        "id": "528f23d14064c139",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 1,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "3bb3acb8e25d437f",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "4de1587f960daaf6",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 5,
+        "width": 7,
+        "height": 1
+    },
+    {
+        "id": "49569ce72ba0fc12",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "45fcd93316cb044e",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 8,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "fa9d1f7904baf8d8",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 9,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "b1bb1e1a013e3145",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 10,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "f4445075575ece82",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 11,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "306570030a603c3a",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 12,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "760f4e66f95d9d30",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 19,
+        "width": 22,
+        "height": 1
+    },
+    {
+        "id": "6e52cf037460b605",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 21,
+        "width": 1,
+        "height": 1
+    },
+    {
+        "id": "d3c0f7b7b60cdcf1",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 26,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "5600cb710211b15f",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 27,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "4baaf6fdc59f0dad",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 28,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "5dab247e028b77e9",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 29,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "9b51a3538d7c44c2",
+        "type": "ui_spacer",
+        "z": "6fe168a9ef2a31e2",
+        "name": "spacer",
+        "group": "a4d9c1106bbb99a9",
+        "order": 30,
+        "width": 10,
+        "height": 1
+    },
+    {
+        "id": "46483f56842c47dd",
+        "type": "ui_group",
+        "name": "Acervo",
+        "tab": "129196755cef0afa",
+        "order": 4,
+        "disp": false,
+        "width": 20,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "53dd28f9a90ac34b",
+        "type": "postgreSQLConfig",
+        "name": "",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "bancolivraria",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "admin",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "771b204495434644",
+        "type": "ui_group",
+        "name": "Logo1",
+        "tab": "129196755cef0afa",
+        "order": 1,
+        "disp": false,
+        "width": 3,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "108916df1b335a29",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "2af46803b18e4968",
+        "order": 1,
+        "disp": true,
+        "width": 6
+    },
+    {
+        "id": "b6b198495490e4f9",
+        "type": "ui_group",
+        "name": "Titulo",
+        "tab": "129196755cef0afa",
+        "order": 2,
+        "disp": false,
+        "width": "14",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "51073ab976e6c11e",
+        "type": "ui_group",
+        "name": "Logo2",
+        "tab": "129196755cef0afa",
+        "order": 3,
+        "disp": false,
+        "width": 3,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "c70eae921d20b96c",
+        "type": "postgreSQLConfig",
+        "name": "",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "bancolivraria",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "admin",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "4cc31213a2849d58",
+        "type": "ui_group",
+        "name": "Logo",
+        "tab": "48724c5b6c5a5f45",
+        "order": 2,
+        "disp": false,
+        "width": 3,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dd0f100fe1a7b60b",
+        "type": "ui_group",
+        "name": "Logo2",
+        "tab": "48724c5b6c5a5f45",
+        "order": 4,
+        "disp": false,
+        "width": 3,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "faf1541f284c1c66",
+        "type": "ui_group",
+        "name": "Titulo",
+        "tab": "48724c5b6c5a5f45",
+        "order": 3,
+        "disp": false,
+        "width": 16,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a4d9c1106bbb99a9",
+        "type": "ui_group",
+        "name": "Dados Empréstimos",
+        "tab": "48724c5b6c5a5f45",
+        "order": 5,
+        "disp": false,
+        "width": 22,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "af50cec9a8f7f617",
+        "type": "postgreSQLConfig",
+        "name": "dbConnecting",
+        "host": "127.0.0.1",
+        "hostFieldType": "str",
+        "port": "5432",
+        "portFieldType": "num",
+        "database": "bancolivraria",
+        "databaseFieldType": "str",
+        "ssl": "false",
+        "sslFieldType": "bool",
+        "applicationName": "",
+        "applicationNameType": "str",
+        "max": "10",
+        "maxFieldType": "num",
+        "idle": "1000",
+        "idleFieldType": "num",
+        "connectionTimeout": "10000",
+        "connectionTimeoutFieldType": "num",
+        "user": "postgres",
+        "userFieldType": "str",
+        "password": "admin",
+        "passwordFieldType": "str"
+    },
+    {
+        "id": "129196755cef0afa",
+        "type": "ui_tab",
+        "name": "Acervo",
+        "icon": "dashboard",
+        "order": 4,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "2af46803b18e4968",
+        "type": "ui_tab",
+        "name": "Jogando pra testes e etc",
+        "icon": "dashboard",
+        "order": 66,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "48724c5b6c5a5f45",
+        "type": "ui_tab",
+        "name": "Emprestados",
+        "icon": "dashboard",
+        "order": 5,
+        "disabled": false,
+        "hidden": false
+    }
+]
